@@ -42,7 +42,7 @@ const InputForm = () => {
 
 			<Container>
 				<Row>
-					{results?.map((item) => {
+					{results?.map((item, i) => {
 						return (
 							<Col
 								xs={12}

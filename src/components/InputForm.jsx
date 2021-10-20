@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getjobs } from '../utilis/fetches';
-
+import { Link } from 'react-router-dom';
 import CompanyCard from './CompanyCard';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 const InputForm = () => {
@@ -41,6 +41,9 @@ const InputForm = () => {
 			/>
 
 			<Container>
+				<Link to={'/favorites'}>
+					<Button variant='primary'>favorites😎</Button>
+				</Link>
 				<Row>
 					{results?.map((item, i) => {
 						return (

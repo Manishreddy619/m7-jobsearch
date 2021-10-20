@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
 	},
 });
 const Favorites = ({ companies, remove }) => {
+	console.log(companies);
 	return (
 		<Container>
 			<Row>
@@ -32,7 +33,7 @@ const Favorites = ({ companies, remove }) => {
 									<Card.Title>index = {item.company_name}</Card.Title>
 									<Card.Text> Job Title ={item.title}</Card.Text>
 
-									<Button variant='success mt-2' onClick={(e) => remove()}>
+									<Button variant='success mt-2' onClick={(e) => remove(i)}>
 										remove from favorites 🤨
 									</Button>
 								</Card.Body>

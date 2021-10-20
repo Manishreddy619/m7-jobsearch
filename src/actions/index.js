@@ -6,6 +6,6 @@ export const addToFavoritesAction = (company) => ({
 	payload: company,
 });
 export const removeFromFavoritesAction = (index) => ({
-	type: ADD_COMPANY_TO_FAVORITES,
+	type: REMOVE_COMPANY_FROM_FAVORITES,
 	payload: index,
 });

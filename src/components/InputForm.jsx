@@ -3,27 +3,37 @@ import { getjobs } from '../utilis/fetches';
 import { Link } from 'react-router-dom';
 import CompanyCard from './CompanyCard';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
-const InputForm = () => {
+import { connect } from 'react-redux';
+import { getJobDataThunk } from '../actions';
+const mapStateToProps = (state) => ({
+	jobdata: state.data.stock,
+});
+const mapDispatchToProps = (dispatch) => ({
+	getData: () => {
+		dispatch(getJobDataThunk());
+	},
+});
+const InputForm = ({ getData, jobdata }) => {
 	const [searchTerm, setSearchTerm] = useState('');
-	const [data, setData] = useState([]);
+
 	const handleChange = (event) => {
 		setSearchTerm(event.target.value);
 	};
 	const results = !searchTerm
-		? data
-		: data.filter((item) =>
+		? jobdata
+		: jobdata.filter((item) =>
 				item.company_name
 					.toLowerCase()
 					.includes(searchTerm.toLocaleLowerCase()),
 		  );
-	const fetchdata = async () => {
-		let result = await getjobs();
-		console.log(result.data);
-		let dataArray = result.data;
-		setData(dataArray);
-	};
+	// const fetchdata = async () => {
+	// 	let result = await getjobs();
+	// 	console.log(result.data);
+	// 	let dataArray = result.data;
+	// 	setData(dataArray);
+	// };
 	useEffect(() => {
-		fetchdata();
+		getData();
 	}, []);
 	return (
 		<div className='form'>
@@ -65,4 +75,4 @@ const InputForm = () => {
 	);
 };
 
-export default InputForm;
+export default connect(mapStateToProps, mapDispatchToProps)(InputForm);

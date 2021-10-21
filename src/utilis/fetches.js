@@ -1,4 +1,4 @@
-const api = `https://strive-jobs-api.herokuapp.com/jobs?company=${''}&limit=10&skip=10`;
+export const api = `https://strive-jobs-api.herokuapp.com/jobs?company=${''}&limit=40&skip=10`;
 export const getjobs = async () => {
 	try {
 		const apiResp = await fetch(api, {

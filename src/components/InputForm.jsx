@@ -3,19 +3,21 @@ import { getjobs } from '../utilis/fetches';
 import { Link } from 'react-router-dom';
 import CompanyCard from './CompanyCard';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getJobDataThunk } from '../actions';
-const mapStateToProps = (state) => ({
-	jobdata: state.data.stock,
-});
-const mapDispatchToProps = (dispatch) => ({
-	getData: () => {
-		dispatch(getJobDataThunk());
-	},
-});
-const InputForm = ({ getData, jobdata }) => {
+// const mapStateToProps = (state) => ({
+// 	jobdata: state.data.stock,
+// });
+// const mapDispatchToProps = (dispatch) => ({
+// 	getData: () => {
+// 		dispatch(getJobDataThunk());
+// 	},
+// });
+const InputForm = () => {
 	const [searchTerm, setSearchTerm] = useState('');
+	const jobdata = useSelector((state) => state.data.stock);
 
+	const dispatch = useDispatch();
 	const handleChange = (event) => {
 		setSearchTerm(event.target.value);
 	};
@@ -33,7 +35,8 @@ const InputForm = ({ getData, jobdata }) => {
 	// 	setData(dataArray);
 	// };
 	useEffect(() => {
-		getData();
+		// getData();
+		dispatch(getJobDataThunk());
 	}, []);
 	return (
 		<div className='form'>
@@ -75,4 +78,5 @@ const InputForm = ({ getData, jobdata }) => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(InputForm);
+export default InputForm;

@@ -1,19 +1,21 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 import { removeFromFavoritesAction } from '../actions';
-const mapStateToProps = (state) => ({
-	companies: state.companies.favorites,
-});
+// const mapStateToProps = (state) => ({
+// 	companies: state.companies.favorites,
+// });
 
 // mapDispatchToProps is a function returning an object
-const mapDispatchToProps = (dispatch) => ({
-	remove: (index) => {
-		dispatch(removeFromFavoritesAction(index));
-	},
-});
-const Favorites = ({ companies, remove }) => {
-	console.log(companies);
+// const mapDispatchToProps = (dispatch) => ({
+// 	remove: (index) => {
+// 		dispatch(removeFromFavoritesAction(index));
+// 	},
+// });
+const Favorites = () => {
+	// console.log(companies);
+	const companies = useSelector((state) => state.companies.favorites);
+	const dispatch = useDispatch();
 	return (
 		<Container>
 			<Row>
@@ -33,7 +35,9 @@ const Favorites = ({ companies, remove }) => {
 									<Card.Title>index = {item.company_name}</Card.Title>
 									<Card.Text> Job Title ={item.title}</Card.Text>
 
-									<Button variant='success mt-2' onClick={(e) => remove(i)}>
+									<Button
+										variant='success mt-2'
+										onClick={(e) => dispatch(removeFromFavoritesAction(i))}>
 										remove from favorites 🤨
 									</Button>
 								</Card.Body>
@@ -46,4 +50,5 @@ const Favorites = ({ companies, remove }) => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+// export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default Favorites;

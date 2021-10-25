@@ -1,17 +1,18 @@
 import React from 'react';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToFavoritesAction } from '../actions';
-const mapStateToProps = (state) => ({});
+// const mapStateToProps = (state) => ({});
 
-// mapDispatchToProps is a function returning an object
-const mapDispatchToProps = (dispatch) => ({
-	addToCart: (company) => {
-		dispatch(addToFavoritesAction(company));
-	},
-});
+// // mapDispatchToProps is a function returning an object
+// const mapDispatchToProps = (dispatch) => ({
+// 	addToCart: (company) => {
+// 		dispatch(addToFavoritesAction(company));
+// 	},
+// });
 const CompanyCard = ({ item, addToCart, i }) => {
+	const dispatch = useDispatch();
 	return (
 		<Container>
 			<Card>
@@ -21,7 +22,9 @@ const CompanyCard = ({ item, addToCart, i }) => {
 					<Link to={'/companyDetails/' + item._id}>
 						<Button variant='primary'>Check details👼</Button>
 					</Link>
-					<Button variant='success mt-2' onClick={(e) => addToCart(item)}>
+					<Button
+						variant='success mt-2'
+						onClick={(e) => dispatch(addToFavoritesAction(item))}>
 						Add to Favorites 🤩
 					</Button>
 				</Card.Body>
@@ -29,4 +32,4 @@ const CompanyCard = ({ item, addToCart, i }) => {
 		</Container>
 	);
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyCard);
+export default CompanyCard;
